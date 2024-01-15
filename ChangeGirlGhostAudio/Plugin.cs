@@ -62,13 +62,13 @@ namespace ToxicStar.ChangeGirlGhostAudio
     {
         [HarmonyPatch("Update")]
         [HarmonyPrefix]
-        private static void patchM(ref AudioClip ___breathingSFX)
+        private static void patchM(ref AudioClip breathingSFX)
         {
             AudioClip[] newSFX = ToxicStarPlugin.newSFX;
             if (newSFX != null && newSFX.Length >= 0)
             {
                 AudioClip val = newSFX[0];
-                ___breathingSFX = val;
+                breathingSFX = val;
             }
         }
     }
