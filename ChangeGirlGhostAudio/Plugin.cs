@@ -38,7 +38,7 @@ namespace ToxicStar.ChangeGirlGhostAudio
             //寻找路径并加载音频到内存
             var path = $"{Application.dataPath.Substring(0, Application.dataPath.Length - 20)}/BepInEx/plugins/{modGUID}/WinnerWinnerChickenDinner.mp3";
             Logger.LogInfo("音频存放路径：" + path);
-            var uwr = UnityWebRequestMultimedia.GetAudioClip(Application.dataPath + "/WinnerWinnerChickenDinner.mp3", AudioType.MPEG);
+            var uwr = UnityWebRequestMultimedia.GetAudioClip(path, AudioType.MPEG);
             yield return uwr.SendWebRequest();
             //转换
             var audioClip = DownloadHandlerAudioClip.GetContent(uwr);
@@ -62,13 +62,13 @@ namespace ToxicStar.ChangeGirlGhostAudio
     {
         [HarmonyPatch("Update")]
         [HarmonyPrefix]
-        private static void patchM(ref AudioClip breathingSFX)
+        private static void patchM(ref AudioClip ___breathingSFX)
         {
             AudioClip[] newSFX = ToxicStarPlugin.newSFX;
             if (newSFX != null && newSFX.Length >= 0)
             {
                 AudioClip val = newSFX[0];
-                breathingSFX = val;
+                ___breathingSFX = val;
             }
         }
     }
